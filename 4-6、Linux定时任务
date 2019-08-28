@@ -1,0 +1,60 @@
+Linux定时任务
+    crontab
+        linux系统是由cron 这个系统服务来控制的。linux系统上包含很多的计划性工作。使用者自己也可以设置
+    计划任务，所以Linux系统提供了使用者控制计划任务的命令。
+
+    crontab的启动
+        /sbin/service crond status： 查看定时任务的服务是否启动
+        start/stop/restart： 启动服务/停止服务/重新启动服务
+        reload： 重新载入配置
+
+    crontab的服务权限
+        crontab的权限管理存储在cron.allow文件与cron.deny文件中。如果没有可创建在etc目录下
+        cron.allow文件存储的是允许哪些用户使用crontab
+        cron.deny文件存储的是不允许哪些用户使用crontab
+
+    crontab的使用场景说明
+        当两个文件都不存在时，那么只允许root用户使用crontab
+        当cron.allow文件存在，而cron.deny文件不存在时，那么只允许cron.allow文件中的用户使用crontab
+
+        当cron.deny文件存在，而cron.allow文件不存在时，那么只要是没有列在cron.deny文件中的用户都可以使用crontab
+
+        如果两个文件都存在，而一个用户在两个文件中都有，那么以cron.allow文件中的为准，只要cron.allow文件中有
+    该用户，则该用户就可以使用crontab
+
+    crontab的使用
+        命令：cron -e 在编辑页面输入命令即可
+
+    crontab的编辑格式
+        基本格式：minute hour day month week command
+        对应单位：分    时    日   月    周  命令
+
+    crontab的时间单位说明
+        第1列表示分钟00~59 每分钟用*或者*/1表示
+        第2列表示小时00~23（0表示0点）
+        第3列表示日期01~31
+
+        第4列表示月份01~12
+        第5列标识号星期0~6（0表示星期天）
+        第6列要运行的命令
+
+    crontab的符号说明
+        *：代表取值范围内的所有值
+        /：代表每的意思
+        -：代表从某个数字到某个数字
+        ,：分隔开几个不同的数字
+
+
+    命令：
+        /sbin/service crond status
+        crontab -e: 进入编辑
+        按i插入内容
+        * * * * * nmon -f -F /data/nmonData/demo1.nmon -s 1 -c 10:文件中编辑的命令，表示每分钟都启动，
+    采集10次，每次之间间隔1秒。
+        :qw 保存文件内容并退出
+        crontab  -l :查看文件中保存的定时命令
+
+
+    crontab命令详解：https://www.cnblogs.com/suifengbingzhu/p/4538143.html
+
+

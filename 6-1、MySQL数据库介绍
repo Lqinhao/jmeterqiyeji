@@ -1,0 +1,6 @@
+主流分支
+    MariaDb
+        MySQL之父Widenius创建，目标在于替换现有MySQL
+        兼容MySQL，对于开发者来说感知不到变化
+        MariaDb is free and open source software
+

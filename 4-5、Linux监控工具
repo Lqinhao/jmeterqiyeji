@@ -1,0 +1,63 @@
+Linux监控工具
+    nmon
+        nmon是一种在Linux操作系统上广泛使用的监控与分析工具，nmon所记录的信息是比较全面的，它能在系统运行
+    过程中实时地捕捉系统资源的使用情况，并且能输出结果到文件中，然后通过nmon_analyzer工具产生数据文件与图
+    形化结果。
+
+    nmon下载与安装
+        wget http://sourceforge.net/projects/nmon/files/nmon_linux_14i.tar.gz
+        tar gxvf nmon_linux_14i.tar.gz
+
+        mv nmon_x86_64_contos6 nmon
+        cp nmon /usr/bin/
+
+    nmon用法：
+        -f 这是nmon必选参数，并且必须放在第一个，就是输出文件的意思；
+        用该参数的话，nmon输出的文件名就是默认名称：
+            hostname_data_time.nmon
+
+        -F <filename> 这个参数和 -f 相同，只不过用户可以自己定义文件名称；
+
+        -s 采集数据频率，也就是保存数据的频率；
+
+        -c 采集数据次数；
+        -t 输出最消耗资源的进程数据；
+        -h 查看帮助；
+
+    命令：
+        cd nmonData/
+        pwd
+        ll
+        nmon
+        nmon -f -F demo.nmon -s 1 -c 10 -t
+
+    nmon_analyzer
+        nmon analyser的作用就是分析nmon 数据采集后的结果，nmon analyser 需要借助Excel的宏，WPS默认
+    没有宏，需要下载插件
+
+    nmon_analyzer下载
+        https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/Power+Systems/page/nmon_analyser
+
+    nmon_analyzer重点sheet
+        SYS_SUMM：  系统汇总页，包含cpu占有率变化情况，磁盘IO的变化情况等信息；
+        AAA： 关于操作系统以及nmon本身的一些信息；
+
+        CPUnn: 显示执行时间内CPU占用情况
+        CPU_ALL: 所有CPU概述，显示所有CPU平均占用情况；
+        CPU_SUMM: 每一个CPU在执行时间内的占用情况；
+
+        DGBUSY：磁盘组每个hdisk设备平均占用情况；
+        DGREAD：每个磁盘组的平均读情况
+        DGSIZE：每个磁盘组的平均读写情况；
+
+        DGWRITE：每个磁盘组的平均写情况；
+        DGXFER: 每个磁盘组的I/O每秒操作；
+        MEM：内存相关的主要信息，使用、空闲内存大小等。
+
+        NET: 显示系统中每个网络适配器的数据传输速率（千字节/秒）
+        PAGE： 本sheet统计相关页信息的记录
+
+
+
+
+

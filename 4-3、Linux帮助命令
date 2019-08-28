@@ -1,0 +1,152 @@
+Linux帮助命令
+    man
+        linux下的函数手册命令，可以查看所有命令的使用方法。
+        命令：
+            man ls
+
+实时监控
+
+    top
+        top: 能够实时监控系统的运行状态，并且可以按照cpu及内存等进行排序。
+            语法：
+                top -hv | -bcHiOSs -d secs -n max -u|U user -p pid(s) -o field -w [cols]
+
+
+    top参数
+        -h：帮助
+        -p: 监控指定的进程，当监控多个进程时，进程ID以逗号分隔。这个选项只能在命令行下使用。
+
+    top任务区命令
+        M: 按内存使用率排序
+        P:按CPU使用率排序
+        z:彩色/黑白显示。
+
+    top
+        top中的load average:系统的运行队列的平均利用率，也可以认为是可运行进程的平均数。三个值分别表示
+    在最后的1分钟、5分钟、15分钟的平均负载值。
+
+    top说明
+        在单核cpu中load average 的值为1时表示满负荷状态。同理在多核cpu中满负载的load average的值为1*cpu核数。
+
+    命令：
+        top -p 1,2 :表示只监控进程1和2
+        top -h :查看帮助命令
+
+
+    vmstat
+        可以监控操作系统的进程状态、内存、虚拟内存、磁盘IO、CPU的信息。
+            语法：
+                vmstat [-a] [-n] [-S unit] [delay [count]]
+
+    vmstat参数
+        -S: 使用指定单位显示。参数有k、K、m、M，分别代表1000、1024、1000000、1048576字节（byte）.
+    默认单位为K（1024bytes）
+
+    命令：
+        vmstat
+        vmstat 1 1 : 间隔1秒1次
+        vmstat 1 2 ：间隔1秒2次
+
+实时监控-内存
+    free
+        能够监控系统的内存使用状态。
+            其中，
+                total: 总计物理内存的大小
+                Used: 已使用多大
+                Free: 可用有多少
+                shared: 多个进行共享的内存总额
+                buffers/cached: 磁盘缓存的大小
+    命令：
+        free
+        free -h
+
+实时监控-cpu
+    mpstat
+        mpstat最大的特点是：可以查看多核心cpu中每个计算核心的统计数据。
+            语法：
+                mpstat [-P {|ALL}] [interval [count]]
+
+    mpstat参数
+        -P {|ALL} 表示监控哪个CPU，cpu在[0,cpu-1]中取值
+        interval 相邻的两次采样的间隔时间
+        count 采样的次数，count只能和delay 一起使用
+
+    mpstat需注意
+        当没有参数时，mpstat 则显示系统启动以后所有信息的平均值。
+        有interval时，第一行信息自系统启动以来的平均信息。从第二行开始，输出为前一个interval 时间段的平均信息。
+
+    命令：
+        mpstat
+        yum install -y sysstat
+        mpstat -P 0 :显示第0个cpu的数据
+        mpstat 1 1 :间隔1秒采集一次
+        mpstat 1 5 :间隔1秒采集5次
+
+实时监控-网络
+    netstat
+        netstat命令用于显示本机网络链接、运行端口、路由表等信息。
+
+    netstat参数说明
+        -n: 拒绝显示别名，能显示数字的全部转化成数字。
+        -l: 仅列出有在Listen(监听)的服务状态
+        -p: 显示建立相关链接的程序名
+
+        -t(tcp): 显示tcp相关选项
+        -u(udp): 显示udp相关选项
+
+        -i: 显示自动匹配接口的信息。
+        -c: 每隔一个固定时间，执行该netstat 命令。
+
+    命令：
+        netstat -ntlp :显示tcp在listen状态的程序
+        netstat -i : 显示自动匹配接口的信息
+        netstat -i -c 1 :每隔一秒自动显示一次自动匹配接口的信息
+
+实时监控-磁盘
+    iostat
+        iostat是对系统磁盘IO操作进行监控，它的输出主要显示磁盘的读写操作的统计信息。同时给出cpu的使用情况。
+
+    iostat用法
+        iostat [ -c | -d] [-k | -m] [-t] [-V] [-x] [device [...]|ALL] [-p [device|ALL]] [interval [count]]
+
+        -x device 输出指定要统计的磁盘设备名称，默认为所有磁盘设备。
+
+    命令：
+        iostat
+        iostat -x
+        iostat -x sda: 指定sda磁盘
+        iostat -x sda 1 1 :指定sda磁盘，间隔1秒获取一次
+        iostat -x sda 1 2 :指定sda磁盘，间隔1秒获取2次
+
+万能命令
+    sar简介
+        （System Activity Report 系统活动情况报告）是目前Linux上最为全面的系统性能分析工具之一，可以从多方面
+    对系统的活动进行报告
+
+    sar的性能监控范围
+        文件的读写情况，系统调用的使用情况，磁盘I/O、CPU效率、内存使用情况、进程活动及IPC有关的活动等
+
+    sar语法
+        sar [options] [-A] [-o file] t [n]
+
+    sar语法说明
+        在命令行中，n和t两个参数组合起来定义采样间隔和次数，t为采样间隔，是必须有的参数，n为采样次数，是可选的，
+    默认值是1。-o file 表示将命令结果以二进制格式存放在文件中，file 在此处不是关键字，是文件名。options 为命令行
+    选项。
+
+    sar选项
+        -A：所有报告的总和
+        -u: CPU 利用率
+        -v: 进程、节点、文件和锁表状态
+
+        -r: 显示系统内存使用情况
+        -B：内存分页情况
+        -b: 缓冲区使用情况
+
+
+
+
+
+
+
+

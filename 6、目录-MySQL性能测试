@@ -1,0 +1,16 @@
+主要内容
+    MySQL数据库介绍
+    MySQL数据库监控指标
+    MySQL慢查询工作原理及操作
+
+    SQL的分析与调优方法
+    MySQL索引的概念及作用
+    MySQL索引的工作原理与设计规范
+
+    MySQL存储引擎
+    MySQL实时监控
+    MySQL集群监控方案
+
+    MySQL性能测试的用例准备
+    使用Jmeter开发MySQL性能测试脚本
+    执行测试

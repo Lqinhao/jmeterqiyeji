@@ -1,0 +1,41 @@
+MySQL慢查询
+    慢查询定义
+        执行速度超过定义的时间的查询
+        不同的系统定义不同的慢查询指标
+
+    慢查询开启
+        编辑/etc/my.cnf,在[mysql]域中添加：
+            开启慢查询： slow_query_log=1
+
+            慢查询日志路径：slow_query_log_file=/data/mysql/slow.log
+            慢查询的时长：long_query_time=1
+
+        未使用索引的查询也被记录到慢查询日志中
+        log_queries_not_using_indexes=1
+
+    慢查询日志分析
+        mysqldumpslow命令
+            -s 是表示按照何种方式排序
+            -t 是top n的意思，即为返回前面多少条的数据
+            -g 后边可以写一个正则匹配模式，大小写不敏感的
+
+        mysqldunpslow -s 更多参数
+            c: 访问计数
+            l：锁定时间
+            r: 返回记录
+
+            t: 查询时间
+            al: 平均锁定时间
+            ar: 平均返回记录数
+
+            at：平均查询时间
+
+        慢查询分析举例
+            得到返回记录集最多的10个SQL
+                mysqldumpslow -s r -t 10 slow.log
+
+            得到访问次数最多的10个SQL
+                mysqldumpslow -s c -t 10 slow.log
+
+            得到按照时间排序的前10条里面含有左连接的查询语句
+                mysqldumpslow -s t -t 10 -g "left join" slow.log

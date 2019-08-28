@@ -1,0 +1,23 @@
+Linux下的进程追踪
+    strace简介
+        strace命令是一个集诊断、调试、统计与一体的工具，我们可以使用strace对应用的系统调用和信号传递的跟踪结果
+    来对应用进行分析，以达到解决问题或者是了解应用工作过程的目的。
+
+    strace选项
+        -p: 跟踪指定的进程
+        -f: 跟踪有fork子进程系统调用
+
+        -c 统计每一系统调用的所执行的时间，次数和出错的次数等。
+        -t : 在输出中的每一行前加上时间信息。-tt 时间确定到微秒级。
+
+        -e expr: 输出过滤器，通过表达式，可以过滤掉你不想要输出。
+        -o filename: 默认strace 将结果输出到stdout。通过-o可以将输出写入到filename 文件中。
+
+    命令：
+        strace -ff -F -o ls.log ls -al
+        ls
+        ll
+        cat ls.log.2529
+        strace -ff -F -t -o zkstart.log ./zkServer.sh start
+        more zkstart.log.2551
+

@@ -1,0 +1,8 @@
+实时监控
+    orzdba
+
+    命令：
+        ./orzdba
+        nohup ./orzdba -lazy -d sda -C 5 -i 2 -L /tmp/orzdba.log > /dev/null 2>&1 &
+
+    详解：https://yq.aliyun.com/articles/516672

@@ -1,0 +1,44 @@
+MySQL数据库重点监控指标
+    QPS
+        queries per seconds  每秒中查询数量
+        show global status like 'Question%';
+        Queries/seconds
+
+    TPS
+        Tranaction per seconds 每秒钟事务数量
+        TPS= （Com_commit + Com_rollback）/seconds
+
+        show global status like 'Com_commit';
+        show global status like 'Com_rollback';
+
+    线程连接数
+        show global status like 'Max_used_connectons';
+        show global status like 'Threads%';
+
+    最大连接数
+        show variable like 'max_connections';
+
+    Query Cache(查询缓存)
+        查询缓存用于缓存select查询结果
+        当下次接收到相同查询请求时，不再执行实际查询处理而直接返回结果
+        适用于大量查询、很少改变表中数据
+
+        修改my.cnf
+        将query_cache_size设置为具体的大小，具体大小是多少取决于查询的实际情况，但最好设置为1024的倍数，
+    参考值32M。
+
+        增加一行：query_cache_type=0/1/2
+        如果设置为1，将会缓存所有的结果，除非你的select语句使用SQL_NO_CACHE禁用了查询缓存
+        如果设置为2，则只缓存在select语句中通过SQL_CACHE指定需要缓存的查询
+
+    Query Cache命令率
+        show status like 'Qcache';
+        Query_cache_hits=(Query_hits/(Qcache_hits+Qcache_inserts))*100%
+
+    锁定状态
+        show global status like '%lock%';
+        Table_locks_waited/Table_locks_immediate值越大代表表锁造成的阻塞越严重
+        Innodb_row_lock_waits innodb行锁，太大可能是间隙锁造成的
+
+    主从延时
+        查询主从延时时间： show slave status

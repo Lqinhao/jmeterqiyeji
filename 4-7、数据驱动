@@ -1,0 +1,62 @@
+数据驱动
+    什么是数据驱动
+        定义
+            从数据文件中读取测试数据，驱动测试过程的一种测试方法
+            数据驱动可以理解为更高级的参数化
+
+        特点
+            测试数据与测试代码分离
+            数据控制过程
+
+        好处
+            减少测试代码量
+            降低脚本开发和维护的成本
+            便于用例的修改和维护（不用修改代码）
+
+        要求
+            较强的代码能力
+            较强的分层架构设计思维
+            对开发框架要有一定的了解
+
+    数据驱动的使用场景
+        复杂的业务流程
+        根据业务场景分流
+        符合条件的并发场景
+
+    电商业务模型
+        打开首页      登录          浏览生活用品
+                                    浏览床上用品
+                                    查看购物车
+                      注册          重定向登录    退出登录
+
+                      浏览电子商品
+
+
+    Jmeter中的数据驱动
+        控制方式
+            参数化
+            逻辑控制器
+
+    Jmeter数据驱动实战
+        场景
+            登录后男人浏览电子商品
+            登录后女人浏览化妆品
+
+    JDBC驱动的下载：https://blog.csdn.net/qq_40356457/article/details/81407800
+    Jmeter测试mysql数据库之JDBC请求教程网址：https://www.cnblogs.com/wolfshining/p/7516681.html
+
+
+    JDBC Connection Configuration中的配置
+        Variable Name for created pool : testuser(此处为变量名，一定要填写)
+
+        Database URL:jdbc: mysql://127.0.0.1:3306/vue_shop?serverTimezone=UTC
+                    (此处“?serverTimezone=UTC ”一定要有，不然会报时间错误,IP要写成IP地址，不建议写localhost)
+        DJBC Driver class: com.mysql.jdbc.Driver
+        Username: root
+        Password: root
+
+    聚合报告各字段说明：https://www.cnblogs.com/nzyjlr/p/7764894.html
+    if逻辑控制器的使用：https://www.cnblogs.com/yaoqingzhuan/p/8903704.html
+    使用 __jexl3 函数来做if控制器中变量转换为True或False
+    使用 __V 函数做字符串拼接
+

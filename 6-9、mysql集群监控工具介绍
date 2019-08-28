@@ -1,0 +1,9 @@
+MySQL集群监控-天兔LEPUS
+
+    天兔LEPUS简介
+        为所有数据库管理者、互联网企业数据库监控而设计
+        无需部署Agent,轻松监控1000+数据库实例，完善灵活的告警配置，详细的性能分析指标
+
+    下载使用
+        下载：http://www.lepus.cc/soft/17
+        安装部署：https://yq.aliyun.com/articles/414548

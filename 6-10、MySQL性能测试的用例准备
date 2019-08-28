@@ -1,0 +1,15 @@
+用例准备
+    要点：
+        使用sql模拟用户使用场景
+
+
+Jmeter开发mysql性能测试脚本
+    步骤：
+        JDBC Connection Configuration 配置mysql配置
+        JDBC Request 写sql脚本
+
+
+数据库语句
+    select * form user
+    insert into user (name,sex,age) values （"zhangsan",0,20）
+    update user set name = "wangyi" where name="zhangsan"
