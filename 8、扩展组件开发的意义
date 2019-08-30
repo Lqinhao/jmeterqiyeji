@@ -64,7 +64,102 @@ Jmeter扩展组件开发
 
         IDEA 怎么修改maven项目依赖jar的存放位置:https://blog.csdn.net/a15705952175/article/details/80692850
         IntelliJ 中Maven pom.xml依赖不生效解决:https://blog.csdn.net/a58YYXG/article/details/68060226
-        8.
+        8.First代码如下：
+            package com.demo;
+            import org.apache.jmeter.protocol.java.sampler.AbstractJavaSamplerClient;   //导入AbstractJavaSamplerClient
+            import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
+            import org.apache.jmeter.samplers.SampleResult;
+
+            public class First extends AbstractJavaSamplerClient {
+                public SampleResult runTest(JavaSamplerContext javaSamplerContext) {
+                    System.out.println("hello jmeter!!!");
+                    return null;
+                }
+            }
+
+        下载软件binary与source版本的区别：https://blog.csdn.net/heimao0307/article/details/79790081
+                                          binaries表示已编译好的文件，可以直接使用的版本；
+                                          source表示源代码版本，需要自己编译；
+        tar.gz和zip的区别：https://blog.csdn.net/suyu_yuan/article/details/52733117
+                           https://zhidao.baidu.com/question/873537413743808372.html
+                           扩展名为tar.gz和zip的文件其实这两个压缩文件里面包含的内容是一样的,只是压缩格式不一样
+                           ,tar.gz格式的文件比zip文件要小不少
+                           tar.gz压缩格式用于unix的操作系统,而zip用于windows的操作系统,但在windows系统中用
+                           WinRar工具同样可以解压缩tar.gz格式的,所以下载时不用担心或是疑惑什么!
+        mvn环境搭建：https://www.cnblogs.com/lzx2509254166/p/7674455.html
+
+        9.在Terminal中输入命令:
+            mvn clean package
+
+            来编译生成jar包，jar包位置：工程目录的target目录下，jar包名如：demo-1.0-SNAPSHOT.jar
+
+        10.将编译好的jar包放到jmeter的lib文件夹下的ext文件夹下
+
+        11.重启jmeter
+
+        12.在jmeter中新建一个java 请求，在classname中就能找到对应的包名及类：com.demo.First
+
+        13.在package(com.demo)中新建java class: Second
+
+        14.Second代码如下：
+            package com.demo;
+            import org.apache.jmeter.config.Arguments;
+            import org.apache.jmeter.protocol.java.sampler.JavaSamplerClient;   //导入
+            import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
+            import org.apache.jmeter.samplers.SampleResult;
+
+            public class Second  implements JavaSamplerClient {
+                /*这个方法就是一个初始化方法，我们所有的初始化的动作都可以在这里写
+                * */
+                public void setupTest(JavaSamplerContext javaSamplerContext) {
+                    System.out.println("setupTest run");
+
+                }
+                /*这个方法就是实现你具体功能逻辑的方法
+                * */
+                public SampleResult runTest(JavaSamplerContext javaSamplerContext) {
+                    System.out.println("runTest run");
+                    return null;
+                }
+
+                /*这个方法就是来做一些收尾工作的。
+                * */
+                public void teardownTest(JavaSamplerContext javaSamplerContext) {
+                    System.out.println("teardownTest run");
+
+                }
+                /*这个方法决定了在jmeter当中要显示哪些属性
+                * */
+                public Arguments getDefaultParameters() {
+                    System.out.println("getDefaultParameters run");
+                    return null;
+                }
+            }
+
+            ---这是JavaSamplerClient的接口方法
+
+        Jmeter中关于中文乱码问题：https://www.cnblogs.com/Wallace-2018/p/11005172.html
+                                  https://www.cnblogs.com/MTXue/p/11208176.html
+                                  https://www.cnblogs.com/mihoutao/p/10546566.html
+            解决方法一：
+                1.打开jmter配置文件bin/jmeter.properties
+                2.修改配置文件，查找“sampleresult.default.encoding”将其改为utf8，注意要去掉“#”号
+                    ampleresult.default.encoding=utf-8
+
+        maven默认编码格式为GBK，要想在cmd中显示中文，就需要修改maven的默认编码格式为utf-8
+
+        修改maven的编码格式为utf-8（cmd中中文显示乱码）：https://blog.csdn.net/mqingo/article/details/80909384
+            1.maven默认编码为GBK注:配好MAVEN_HOME的环境变量后,运行cmd.打开cmd 运行mvn -v命令即可.
+            2.修改UTF-8为默认编码：
+                设置环境变量
+                    变量名 MAVEN_OPTS
+                    变量值 -Xms256m -Xmx512m -Dfile.encoding=UTF-8
+            3.保存,退出cmd.重新打开cmd 运行mvn -v命令即可.
+
+        15.
+
+
+
 
 
 
