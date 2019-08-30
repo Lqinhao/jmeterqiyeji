@@ -1,0 +1,76 @@
+Jmeter扩展组件开发
+    扩展组件开发的意义
+        定制化开发组件         入参
+                               协议
+                               复杂调用逻辑
+                               功能
+                               等等等等
+
+
+开发前的准备
+    使用Intellij IDEA工具
+    工具下载网址：https://www.jetbrains.com/idea/
+                  破解方法：
+                    1.将"jetbrains-agent.jar"文件放到IDEA安装目录下的bin文件夹下
+                    2.在idea64.exe.vmoptions文件中最后一样加入：
+                        -javaagent:D:\IDEA\bin\jetbrains-agent.jar
+                        其中“D:\IDEA\bin\jetbrains-agent.jar”为jetbrains-agent.jar的路径地址
+                        注意：路径中最好不要带有中文或空格
+                    3.在idea.exe.vmoptions文件中最后一样加入：
+                        -javaagent:D:\IDEA\bin\jetbrains-agent.jar
+
+                    4.重启IDEA；
+                    5.选择“Activation code”，输入ACTIVATION_CODE.txt文件中的内容；
+                    6.点击确定激活即可
+
+                  破解教程：https://www.jiweichengzhu.com/article/c6ae011e3fce496fb11b6ba60c1a0e41
+                            https://zhile.io/2018/08/25/jetbrains-license-server-crack.html
+
+创建maven工程及可能遇到的坑
+    扩展开发实现的两种方式
+        继承AbstractJavaSamplerClient抽象类
+        实现JavaSamplerClient接口
+
+    实战Hello Jmeter
+        1.打开IDEA，创建Maven工程
+        2.点击“Next”;
+        3.GroupId填写：test
+          Artifactld填写：demo
+          点击“Next”
+        4.工程名字(Project name)即为demo
+          修改工程路径(Project location)为“D:\IdeaProjects\demo”（可以不修改）
+          点击“Finish”
+
+        5.新建工程成功后，
+            在pom.xml中添加内容如下，用于引入jmeter,版本与你要使用的jmeter版本一致：
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.jmeter</groupId>
+                            <artifactId>ApacheJMeter_core</artifactId>
+                            <version>5.1.1</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.jmeter</groupId>
+                            <artifactId>ApacheJMeter_java</artifactId>
+                            <version>5.1.1</version>
+                        </dependency>
+                    </dependencies>
+
+                    此处为：5.1.1版本
+            maven组件地址：https://mvnrepository.com/artifact/org.apache.jmeter，可以查看引用说明
+
+        6.在工程目录src->main->java中新建package：com.demo
+        7.在package(com.demo)中新建java class: First
+
+        IDEA 怎么修改maven项目依赖jar的存放位置:https://blog.csdn.net/a15705952175/article/details/80692850
+        IntelliJ 中Maven pom.xml依赖不生效解决:https://blog.csdn.net/a58YYXG/article/details/68060226
+        8.
+
+
+
+
+
+
+
+
+
