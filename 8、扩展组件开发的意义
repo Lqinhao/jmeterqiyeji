@@ -156,6 +156,17 @@ Jmeter扩展组件开发
                     变量值 -Xms256m -Xmx512m -Dfile.encoding=UTF-8
             3.保存,退出cmd.重新打开cmd 运行mvn -v命令即可.
 
+        修改java 请求响应数据中文乱码问题：https://blog.csdn.net/wuyepiaoxue789/article/details/58594253
+            方法一：
+                1.在java 请求 上添加一个后置处理器"BeanShell PostProcessor"；
+                2.其脚本框中输入：prev.setDataEncoding("UTF-8");
+                3.保存即可；
+                4.运行结果树中的编码就是正常中文了；
+            方法二：
+                在源代码中将响应结果加上UTF-8编码：
+                    //将buffer变量的内容转换为字符串，编码格式为UTF-8赋值给 restultData
+                    restultData = new String(buffer,"UTF-8");
+
         15.
 
 
