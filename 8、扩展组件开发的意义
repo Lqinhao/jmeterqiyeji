@@ -167,7 +167,71 @@ Jmeter扩展组件开发
                     //将buffer变量的内容转换为字符串，编码格式为UTF-8赋值给 restultData
                     restultData = new String(buffer,"UTF-8");
 
-        15.
+函数助手扩展开发demo演示
+    扩展组件开发-自定义函数
+        1.pom.xml文件增加内容：
+            <dependency>
+                <groupId>org.apache.jmeter</groupId>
+                <artifactId>ApacheJMeter_functions</artifactId>
+                <version>5.1.1</version>
+            </dependency>
+
+        2.在src/main/java文件夹下，新建package：com.function
+            注意：函数扩展插件的名字必须是function,否则jmeter无法识别
+
+        3.在function中新建java类：Plus
+
+        4.Plus代码如下：
+            package com.functions;
+            import org.apache.jmeter.engine.util.CompoundVariable;
+            import org.apache.jmeter.functions.AbstractFunction;
+            import org.apache.jmeter.functions.InvalidVariableException;
+            import org.apache.jmeter.samplers.SampleResult;
+            import org.apache.jmeter.samplers.Sampler;
+
+            import java.util.Collection;
+            import java.util.List;
+
+            public class Plus extends AbstractFunction {
+                /*执行方法
+                * */
+                public String execute(SampleResult sampleResult, Sampler sampler) throws InvalidVariableException {
+                    System.out.println("execute run!!!");
+                    return null;
+                }
+
+                /*设置参数，接收用户传递的参数
+                * */
+                public void setParameters(Collection<CompoundVariable> collection) throws InvalidVariableException {
+                    System.out.println("setParameters run!!!");
+
+                }
+                /*功能名称
+                * */
+                public String getReferenceKey() {
+                    System.out.println("getReferenceKey run!!!");
+                    return "__MyDeom";  //返回函数名称
+            //        return null;
+                }
+
+                /*功能描述，参数描述
+                * */
+                public List<String> getArgumentDesc() {
+                    System.out.println("getArgumentDesc run!!!");
+                    return null;
+                }
+            }
+
+        5.mvn clean package:打包
+
+        6.jar包放到jmeter/lib/ext/ 下
+
+        7.启动jmeter,在 Tools--->Functon Helper Dialog
+                Choose a function 中选择自己定义的函数的函数名即可
+
+        
+
+
 
 
 
